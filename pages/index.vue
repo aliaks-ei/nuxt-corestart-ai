@@ -3,23 +3,23 @@
     <!-- Hero Section -->
     <UContainer class="py-16 sm:py-24">
       <div class="text-center">
-        <UBadge variant="subtle" class="mb-4"> Welcome to the Future </UBadge>
+        <UBadge variant="subtle" class="mb-4"> Ready-to-Use Template </UBadge>
         <h1
           class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl mb-6"
         >
-          Build Amazing Things with
-          <span class="text-primary-600 dark:text-primary-400">Nuxt</span>
+          Skip the Setup, Start Building with
+          <span class="text-primary-600 dark:text-primary-400">Nuxt + Supabase</span>
         </h1>
         <p
           class="text-lg leading-8 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8"
         >
-          Experience the power of modern web development with our secure, fast,
-          and beautiful application. Get started today and unlock your
-          potential.
+          Why spend days setting up auth when you can start coding in minutes? 
+          This template comes with magic link authentication, Google OAuth, and 
+          everything you need to build your next big idea. Just clone, customize, and ship! 🚀
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <UButton size="lg" class="px-8" @click="navigateTo('/login')">
-            Get Started
+            Try the Auth
           </UButton>
           <UButton
             variant="outline"
@@ -27,7 +27,7 @@
             class="px-8"
             @click="scrollToFeatures"
           >
-            Learn More
+            See What's Included
           </UButton>
         </div>
       </div>
@@ -37,11 +37,11 @@
     <UContainer id="features" class="py-16">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-          Why Choose Our Platform?
+          What's Already Built for You?
         </h2>
         <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          Discover the features that make our platform the perfect choice for
-          your next project.
+          Stop reinventing the wheel. This template includes all the boring stuff 
+          so you can focus on what makes your app unique.
         </p>
       </div>
 
@@ -50,17 +50,17 @@
           <template #header>
             <div class="flex justify-center mb-4">
               <UIcon
-                name="i-heroicons-shield-check"
+                name="i-heroicons-envelope"
                 class="w-12 h-12 text-primary-600"
               />
             </div>
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Secure Authentication
+              Magic Link + Google Auth
             </h3>
           </template>
           <p class="text-gray-600 dark:text-gray-300">
-            Enterprise-grade security with Supabase authentication. Magic links,
-            OAuth, and more.
+            No passwords, no hassle. Users can sign in with just their email 
+            or Google account. Supabase handles all the security heavy lifting.
           </p>
         </UCard>
 
@@ -68,17 +68,17 @@
           <template #header>
             <div class="flex justify-center mb-4">
               <UIcon
-                name="i-heroicons-bolt"
+                name="i-heroicons-rocket-launch"
                 class="w-12 h-12 text-primary-600"
               />
             </div>
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Lightning Fast
+              Modern Tech Stack
             </h3>
           </template>
           <p class="text-gray-600 dark:text-gray-300">
-            Built with Nuxt 3 for optimal performance. Server-side rendering and
-            modern optimizations.
+            Nuxt 3 for lightning-fast performance, Supabase for backend magic, 
+            and Nuxt UI for beautiful components. The dream team is assembled.
           </p>
         </UCard>
 
@@ -86,17 +86,17 @@
           <template #header>
             <div class="flex justify-center mb-4">
               <UIcon
-                name="i-heroicons-sparkles"
+                name="i-heroicons-code-bracket"
                 class="w-12 h-12 text-primary-600"
               />
             </div>
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Beautiful Design
+              Production Ready
             </h3>
           </template>
           <p class="text-gray-600 dark:text-gray-300">
-            Crafted with Nuxt UI components. Clean, modern, and fully responsive
-            design system.
+            Clean code, proper middleware, TypeScript support, and best practices 
+            baked in. Deploy with confidence from day one.
           </p>
         </UCard>
       </div>
@@ -109,17 +109,18 @@
       >
         <div class="text-center py-8">
           <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Ready to Get Started?
+            Ready to Build Something Awesome?
           </h2>
           <p
             class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto"
           >
-            Join thousands of developers who are already building amazing
-            applications with our platform.
+            Clone this template, add your own features, and you'll have a 
+            production-ready app faster than you can say "authentication flow". 
+            Your future self will thank you! 
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <UButton size="lg" class="px-8" @click="navigateTo('/login')">
-              Sign Up Now
+              Test Drive the Auth
             </UButton>
             <UButton
               v-if="!user"
@@ -128,7 +129,7 @@
               class="px-8"
               @click="navigateTo('/login')"
             >
-              Already have an account?
+              See Login Flow
             </UButton>
             <UButton
               v-if="user"
@@ -137,7 +138,7 @@
               class="px-8"
               @click="navigateTo('/dashboard')"
             >
-              Go to Dashboard
+              Check Out Dashboard
             </UButton>
           </div>
         </div>

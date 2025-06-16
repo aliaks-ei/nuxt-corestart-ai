@@ -130,14 +130,14 @@
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                    class="block text-sm font-medium text-primary-600 dark:text-primary-400 mb-2"
                   >
                     Email Address
                   </label>
                   <div class="flex items-center space-x-2">
                     <UIcon
                       name="i-heroicons-envelope"
-                      class="w-4 h-4 text-gray-400"
+                      class="w-4 h-4 text-primary-500"
                     />
                     <span class="text-sm text-gray-900 dark:text-white">
                       {{ user?.email }}
@@ -147,14 +147,14 @@
 
                 <div>
                   <label
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                    class="block text-sm font-medium text-primary-600 dark:text-primary-400 mb-2"
                   >
                     User ID
                   </label>
                   <div class="flex items-center space-x-2">
                     <UIcon
                       name="i-heroicons-identification"
-                      class="w-4 h-4 text-gray-400"
+                      class="w-4 h-4 text-primary-500"
                     />
                     <span
                       class="text-sm font-mono text-gray-900 dark:text-white"
@@ -166,14 +166,14 @@
 
                 <div>
                   <label
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                    class="block text-sm font-medium text-primary-600 dark:text-primary-400 mb-2"
                   >
                     Account Created
                   </label>
                   <div class="flex items-center space-x-2">
                     <UIcon
                       name="i-heroicons-calendar"
-                      class="w-4 h-4 text-gray-400"
+                      class="w-4 h-4 text-primary-500"
                     />
                     <span class="text-sm text-gray-900 dark:text-white">
                       {{ formatDate(user?.created_at) }}
@@ -183,14 +183,14 @@
 
                 <div>
                   <label
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                    class="block text-sm font-medium text-primary-600 dark:text-primary-400 mb-2"
                   >
                     Last Updated
                   </label>
                   <div class="flex items-center space-x-2">
                     <UIcon
                       name="i-heroicons-arrow-path"
-                      class="w-4 h-4 text-gray-400"
+                      class="w-4 h-4 text-primary-500"
                     />
                     <span class="text-sm text-gray-900 dark:text-white">
                       {{ formatDate(user?.updated_at) }}

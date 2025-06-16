@@ -8,7 +8,7 @@
           class="flex items-center space-x-2 text-xl font-bold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
         >
           <UIcon name="i-heroicons-home" class="w-6 h-6" />
-          <span>Nuxt App</span>
+          <span>Nuxt Corestart AI</span>
         </NuxtLink>
       </template>
 

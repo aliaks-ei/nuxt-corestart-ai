@@ -10,7 +10,7 @@
           class="inline-flex items-center text-2xl font-bold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
         >
           <UIcon name="i-heroicons-home" class="w-6 h-6 mr-2" />
-          Nuxt App
+          Nuxt Corestart AI
         </NuxtLink>
         <h2
           class="mt-6 text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
@@ -27,38 +27,31 @@
         class="shadow-xl border-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm"
       >
         <div class="p-6">
-          <!-- Magic Link Form -->
-          <form class="space-y-6" @submit.prevent="signInWithMagicLink">
-            <UFormGroup
-              label="Email address"
-              name="email"
-              required
-              :error="emailError"
-            >
+          <!-- Magic Link Form with Valibot Validation -->
+          <UForm :schema="schema" :state="state" class="space-y-6" novalidate @submit="onSubmit">
+            <UFormField label="Email address" name="email">
               <UInput
-                v-model="email"
+                v-model="state.email"
                 type="email"
                 placeholder="Enter your email address"
                 :disabled="loading"
                 size="lg"
                 icon="i-heroicons-envelope"
-                :color="emailError ? 'red' : 'primary'"
                 class="w-full"
-                required
               />
-            </UFormGroup>
+            </UFormField>
 
             <UButton
               type="submit"
               block
               size="lg"
               :loading="loading"
-              :disabled="!email || loading"
-              class="font-semibold mt-4"
+              :disabled="loading"
+              class="font-semibold"
             >
               <template v-if="!loading"> Send Magic Link </template>
             </UButton>
-          </form>
+          </UForm>
 
           <!-- Divider -->
           <div class="mt-6">
@@ -126,43 +119,43 @@
 </template>
 
 <script setup lang="ts">
+import * as v from 'valibot'
+import type { FormSubmitEvent } from '@nuxt/ui'
+
 definePageMeta({
   middleware: "guest",
   layout: false,
 });
 
+// Valibot schema for email validation
+const schema = v.object({
+  email: v.pipe(
+    v.string('Email is required'),
+    v.nonEmpty('Email is required'),
+    v.email('Please enter a valid email address')
+  )
+})
+
+type Schema = v.InferOutput<typeof schema>
+
 const supabase = useSupabaseClient();
-const email = ref("");
 const loading = ref(false);
 const googleLoading = ref(false);
 const message = ref("");
 const messageType = ref<"success" | "error">("success");
-const emailError = ref("");
 
-// Validate email format
-const validateEmail = (email: string) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
+// Form state
+const state = reactive({
+  email: ''
+})
 
-const signInWithMagicLink = async () => {
-  if (!email.value) {
-    emailError.value = "Email is required";
-    return;
-  }
-
-  if (!validateEmail(email.value)) {
-    emailError.value = "Please enter a valid email address";
-    return;
-  }
-
-  emailError.value = "";
+const onSubmit = async (event: FormSubmitEvent<Schema>) => {
   loading.value = true;
   message.value = "";
 
   try {
     const { error } = await supabase.auth.signInWithOtp({
-      email: email.value,
+      email: event.data.email,
       options: {
         emailRedirectTo: `${window.location.origin}/auth/callback`,
       },
@@ -175,7 +168,7 @@ const signInWithMagicLink = async () => {
       message.value =
         "Check your email for the magic link! It may take a few minutes to arrive.";
       messageType.value = "success";
-      email.value = "";
+      state.email = "";
     }
   } catch {
     message.value = "An unexpected error occurred. Please try again.";
@@ -213,11 +206,4 @@ const signInWithGoogle = async () => {
 const clearMessage = () => {
   message.value = "";
 };
-
-// Clear email error when user starts typing
-watch(email, () => {
-  if (emailError.value) {
-    emailError.value = "";
-  }
-});
 </script>
