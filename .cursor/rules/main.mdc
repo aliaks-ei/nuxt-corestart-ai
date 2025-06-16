@@ -234,7 +234,7 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 # Supabase Configuration
 SUPABASE_URL=your_supabase_url
-SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_KEY=your_SUPABASE_KEY
 ```
 
 ### Runtime Config Pattern

@@ -124,7 +124,7 @@ OPENAI_API_KEY=your_actual_openai_api_key_here
 # Supabase Configuration  
 # 👉 Get these from: https://supabase.com/dashboard (your project settings)
 SUPABASE_URL=your_actual_supabase_url
-SUPABASE_ANON_KEY=your_actual_supabase_anon_key
+SUPABASE_KEY=your_actual_SUPABASE_KEY
 ```
 
 #### Where to get these values:
