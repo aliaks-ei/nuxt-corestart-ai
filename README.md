@@ -121,7 +121,7 @@ ls        # macOS/Linux
 dir       # Windows
 
 # Change directory
-cd folder-name        # Go into a folder
+cd folder-name       # Go into a folder
 cd ..                # Go up one level
 cd ~                 # Go to home directory
 ```
@@ -277,35 +277,119 @@ SUPABASE_KEY=your_actual_SUPABASE_KEY
 
 ### Step 5: Configure Google Authentication (Optional)
 
-To enable Google OAuth login, you need to set up Google credentials:
+To enable Google OAuth login, you need to set up Google credentials. This process involves configuring both Google Cloud Console and Supabase.
 
-#### **In Google Cloud Console:**
+> **⚠️ Important**: Google requires you to configure a consent screen before creating OAuth credentials.
 
+### **Part A: Google Cloud Console Setup**
+
+### **1. Create or Select a Project:**
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select an existing one
-3. Enable the **Google+ API**
-4. Go to **"Credentials"** → **"Create Credentials"** → **"OAuth client ID"**
-5. Choose **"Web application"**
-6. Add authorized redirect URIs:
-   ```
-   https://your-project-ref.supabase.co/auth/v1/callback
-   http://localhost:3000/auth/callback
-   ```
-7. **Copy the Client ID** (you'll need this for Supabase)
+2. **Create a new project** or select an existing one from the dropdown at the top
+3. Wait for the project to be created/selected
 
-#### **In Supabase Dashboard:**
+### **2. Configure OAuth Consent Screen (Required):**
+> **📋 Note**: Google requires this step before you can create OAuth credentials.
 
-1. Go to your Supabase project dashboard
-2. Navigate to **Authentication → Providers**
-3. Find **Google** and click **"Enable"**
-4. Paste your **Google Client ID**
-5. Add your **Google Client Secret**
-6. **Save** the configuration
+1. In the **left sidebar**, click **"APIs & services"** → **"OAuth consent screen"**
+2. Choose **"External"** (unless you have a Google Workspace account)
+3. Click **"Create"**
+4. Fill in the required fields:
+   - **App name**: Your app name (e.g., "My AI App")
+   - **User support email**: Your email address
+   - **Developer contact information**: Your email address
+5. Click **"Save and Continue"** through the remaining steps (you can skip optional fields for now)
+6. Click **"Back to Dashboard"** when finished
 
-#### **Test Google Login:**
-- Start your development server (`npm run dev`)
-- Go to the login page
-- You should see a "Continue with Google" button
+### **3. Enable Google+ API:**
+1. In the **left sidebar**, click **"APIs & services"** → **"Library"**
+2. Search for **"Google+ API"** in the search bar
+3. Click on **"Google+ API"** from the results
+4. Click **"Enable"** button
+5. Wait for the API to be enabled (this may take a moment)
+
+### **4. Create OAuth Credentials:**
+1. In the **left sidebar**, click **"APIs & services"** → **"Credentials"**
+2. Click **"+ Create Credentials"** → **"OAuth client ID"**
+3. Choose **"Web application"** as the application type
+4. Give it a name (e.g., "My App OAuth Client")
+5. **Add Authorized Redirect URIs** (see next section for how to get these URLs)
+
+### **5. Get Your Callback URLs:**
+
+You have two options to get the correct callback URL:
+
+**Option A: From Supabase Dashboard (Recommended):**
+1. Go to your [Supabase Dashboard](https://supabase.com/dashboard)
+2. Select your project
+3. Navigate to **"Authentication"** → **"Sign In / Providers"** in the left sidebar
+4. Click on **"Google"** in the providers list
+5. You'll see the **"Callback URL (for OAuth)"** - copy this exact URL
+
+**Option B: Construct Manually:**
+- Your callback URL follows this pattern: `https://[your-project-ref].supabase.co/auth/v1/callback`
+- Replace `[your-project-ref]` with your Supabase project reference
+- **To find your project reference**: Look at your `SUPABASE_URL` - it's the part before `.supabase.co`
+- Example: If your `SUPABASE_URL` is `https://abcd1234.supabase.co`, then your callback URL is `https://abcd1234.supabase.co/auth/v1/callback`
+
+### **6. Add the Redirect URIs:**
+Back in Google Cloud Console, add these URLs to **"Authorized redirect URIs"**:
+```
+https://your-actual-project-ref.supabase.co/auth/v1/callback
+http://localhost:3000/auth/callback
+```
+> Replace `your-actual-project-ref` with your real Supabase project reference
+
+Click **"Create"**
+
+### **7. Copy Your Credentials:**
+> **🔐 Security Warning**: Keep these credentials secure and never commit them to version control!
+
+1. **Copy the Client ID** - you'll need this for Supabase
+2. **Copy the Client Secret** - you'll also need this for Supabase
+3. **Store them safely** - consider using a password manager
+
+### **Part B: Supabase Configuration**
+
+### **1. Navigate to Providers:**
+1. Go to your [Supabase Dashboard](https://supabase.com/dashboard)
+2. Select your project
+3. In the left sidebar, click **"Authentication"** → **"Sign In / Providers"**
+
+### **2. Configure Google Provider:**
+1. Find **"Google"** in the list of providers and click on it
+2. **Enable** the Google provider by toggling the switch
+3. **Paste your Google Client ID** in the "Client ID" field
+4. **Paste your Google Client Secret** in the "Client Secret" field
+5. Click **"Save"** to apply the configuration
+
+> **✅ Verification**: You should see a green checkmark next to Google in the providers list
+
+### **Part C: Testing Google Authentication**
+
+### **Test the Integration:**
+1. **Start your development server**: `npm run dev`
+2. **Navigate to the login page**: [http://localhost:3000/login](http://localhost:3000/login)
+3. **Look for the Google button**: You should see a "Continue with Google" or "Sign in with Google" button
+4. **Test the login flow**: Click the button and verify it redirects to Google's OAuth flow
+
+### **Troubleshooting Common Issues:**
+
+**❌ "Error 400: redirect_uri_mismatch"**
+- **Solution**: Double-check that your redirect URI in Google Cloud Console exactly matches your Supabase callback URL
+- **Check**: Make sure there are no extra spaces or typos in the URLs
+
+**❌ "Error 403: access_blocked"**
+- **Solution**: Make sure you've completed the OAuth consent screen configuration
+- **Check**: Verify that your app is not in "Testing" mode if you want external users to access it
+
+**❌ Google button doesn't appear**
+- **Solution**: Check that you've enabled the Google provider in Supabase and saved the configuration
+- **Check**: Verify your Client ID and Secret are correctly entered in Supabase
+
+**❌ "Invalid client" error**
+- **Solution**: Verify that your Client ID and Client Secret are correct
+- **Check**: Make sure you copied the full credentials without any extra characters
 
 ### Step 6: Setup Cursor MCP Integration for Supabase (Optional)
 
