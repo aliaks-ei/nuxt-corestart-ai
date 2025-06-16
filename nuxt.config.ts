@@ -16,7 +16,10 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  runtimeConfig: {},
+  runtimeConfig: {
+    openaiApiKey: process.env.OPENAI_API_KEY,
+    public: {}
+  },
 
   supabase: {
     // Redirect to login page if user is not authenticated

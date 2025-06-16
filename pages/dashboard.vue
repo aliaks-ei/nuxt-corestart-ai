@@ -31,7 +31,6 @@
                 <UAvatar
                   :alt="user?.email || 'User'"
                   size="md"
-                  :ui="{ background: 'bg-primary-500 dark:bg-primary-400' }"
                   class="cursor-pointer"
                 >
                   {{ user?.email?.charAt(0).toUpperCase() }}
@@ -122,7 +121,7 @@
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                   Account Information
                 </h3>
-                <UBadge variant="subtle" color="green"> Verified </UBadge>
+                <UBadge variant="subtle" color="success"> Verified </UBadge>
               </div>
             </template>
 
@@ -230,6 +229,11 @@ const menuItems = [
       label: 'Dashboard',
       icon: 'i-heroicons-squares-2x2',
       onSelect: () => navigateTo('/dashboard'),
+    },
+    {
+      label: 'AI Chat',
+      icon: 'i-heroicons-chat-bubble-left-right',
+      onSelect: () => navigateTo('/ai-chat'),
     },
   ],
   [

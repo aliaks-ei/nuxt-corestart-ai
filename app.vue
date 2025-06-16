@@ -23,7 +23,6 @@
               <UAvatar 
                 :alt="user.email || 'User'"
                 size="sm"
-                :ui="{ background: 'bg-primary-500 dark:bg-primary-400' }"
               >
                 {{ user.email?.charAt(0).toUpperCase() }}
               </UAvatar>
@@ -38,6 +37,14 @@
                 @click="navigateTo('/dashboard')"
               >
                 Dashboard
+              </UButton>
+              <UButton
+                variant="ghost"
+                size="sm"
+                leading-icon="i-heroicons-chat-bubble-left-right"
+                @click="navigateTo('/ai-chat')"
+              >
+                AI Chat
               </UButton>
               <UButton
                 variant="ghost"
@@ -58,6 +65,11 @@
                       label: 'Dashboard',
                       icon: 'i-heroicons-squares-2x2',
                       click: () => navigateTo('/dashboard')
+                    },
+                    {
+                      label: 'AI Chat',
+                      icon: 'i-heroicons-chat-bubble-left-right',
+                      click: () => navigateTo('/ai-chat')
                     }
                   ],
                   [

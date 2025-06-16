@@ -45,7 +45,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <UCard class="text-center">
           <template #header>
             <div class="flex justify-center mb-4">
@@ -97,6 +97,24 @@
           <p class="text-gray-600 dark:text-gray-300">
             Clean code, proper middleware, TypeScript support, and best practices 
             baked in. Deploy with confidence from day one.
+          </p>
+        </UCard>
+
+        <UCard class="text-center">
+          <template #header>
+            <div class="flex justify-center mb-4">
+              <UIcon
+                name="i-heroicons-chat-bubble-left-right"
+                class="w-12 h-12 text-primary-600"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+              AI Chat Integration
+            </h3>
+          </template>
+          <p class="text-gray-600 dark:text-gray-300">
+            Built-in OpenAI integration with streaming support, customizable 
+            temperature and token limits. Chat with AI right out of the box!
           </p>
         </UCard>
       </div>
