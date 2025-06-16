@@ -120,6 +120,11 @@ const handleAction = () => {
 
 ## Best Practices
 
+### Development Workflow
+- **Server Management**: Do NOT ask users to run `npm run dev` after successful chats or conversations, as users already have the development server running
+- **Hot Reloading**: Assume the development server is active and changes will be automatically reflected
+- **Third-Party Integration**: When using any 3rd party library or service, first check if it's available as a Nuxt module for better integration and optimization
+
 ### Authentication & Security
 - **Middleware Protection**: Use `auth` middleware for protected routes
 - **Guest Routes**: Use `guest` middleware for login/register pages
