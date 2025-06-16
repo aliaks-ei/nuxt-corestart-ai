@@ -1,4 +1,9 @@
-import type { ChatMessage, ChatRequest, ChatResponse, StreamChunk } from '~/types/openai'
+import type {
+  ChatMessage,
+  ChatRequest,
+  ChatResponse,
+  StreamChunk,
+} from "~/types/openai";
 
 export const useOpenAI = () => {
   const sendChatMessage = async (
@@ -10,19 +15,19 @@ export const useOpenAI = () => {
         messages,
         temperature: options.temperature || 0.7,
         maxTokens: options.maxTokens || 1000,
-      }
+      };
 
-      const response = await $fetch<ChatResponse>('/api/openai/chat', {
-        method: 'POST',
+      const response = await $fetch<ChatResponse>("/api/openai/chat", {
+        method: "POST",
         body: request,
-      })
+      });
 
-      return response
+      return response;
     } catch (error: unknown) {
-      console.error('Chat API Error:', error)
-      throw error
+      console.error("Chat API Error:", error);
+      throw error;
     }
-  }
+  };
 
   const sendStreamingChatMessage = async (
     messages: ChatMessage[],
@@ -34,67 +39,70 @@ export const useOpenAI = () => {
         messages,
         temperature: options.temperature || 0.7,
         maxTokens: options.maxTokens || 1000,
-      }
+      };
 
-      const response = await fetch('/api/openai/stream', {
-        method: 'POST',
+      const response = await fetch("/api/openai/stream", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(request),
-      })
+      });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const reader = response.body?.getReader()
-      const decoder = new TextDecoder()
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
 
       if (!reader) {
-        throw new Error('Failed to get response reader')
+        throw new Error("Failed to get response reader");
       }
 
       try {
         while (true) {
-          const { done, value } = await reader.read()
-          
-          if (done) break
+          const { done, value } = await reader.read();
 
-          const chunk = decoder.decode(value)
-          const lines = chunk.split('\n')
+          if (done) break;
+
+          const chunk = decoder.decode(value);
+          const lines = chunk.split("\n");
 
           for (const line of lines) {
-            if (line.startsWith('data: ')) {
+            if (line.startsWith("data: ")) {
               try {
-                const data = JSON.parse(line.slice(6))
-                onChunk(data)
-                
+                const data = JSON.parse(line.slice(6));
+                onChunk(data);
+
                 if (data.done) {
-                  return
+                  return;
                 }
               } catch (parseError) {
-                console.error('Failed to parse SSE data:', parseError)
+                console.error("Failed to parse SSE data:", parseError);
               }
             }
           }
         }
       } finally {
-        reader.releaseLock()
+        reader.releaseLock();
       }
     } catch (error: unknown) {
-      console.error('Streaming Chat API Error:', error)
-      const errorMessage = error instanceof Error ? error.message : 'Failed to process streaming request'
+      console.error("Streaming Chat API Error:", error);
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to process streaming request";
       onChunk({
-        content: '',
+        content: "",
         done: true,
-        error: errorMessage
-      })
+        error: errorMessage,
+      });
     }
-  }
+  };
 
   return {
     sendChatMessage,
     sendStreamingChatMessage,
-  }
-} 
+  };
+};

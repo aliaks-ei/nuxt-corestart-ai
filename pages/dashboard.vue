@@ -1,8 +1,11 @@
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
-    <!-- Header -->
+    <!-- App Header -->
+    <AppHeader />
+    
+    <!-- Page Header -->
     <UContainer>
-      <div class="flex items-center justify-between py-6">
+      <div class="py-6">
         <div>
           <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
             Dashboard
@@ -10,34 +13,6 @@
           <p class="text-gray-600 dark:text-gray-400 mt-1">
             Welcome back, {{ user?.email?.split("@")[0] }}!
           </p>
-        </div>
-        <div class="flex items-center gap-4">
-          <UButton
-            variant="outline"
-            leading-icon="i-heroicons-home"
-            @click="navigateTo('/')"
-          >
-            Home
-          </UButton>
-          <UDropdownMenu :items="menuItems">
-            <template #default="{ open }">
-              <UButton
-                variant="ghost"
-                :class="[
-                  'p-0 hover:bg-transparent',
-                  open && 'ring-2 ring-primary-500'
-                ]"
-              >
-                <UAvatar
-                  :alt="user?.email || 'User'"
-                  size="md"
-                  class="cursor-pointer"
-                >
-                  {{ user?.email?.charAt(0).toUpperCase() }}
-                </UAvatar>
-              </UButton>
-            </template>
-          </UDropdownMenu>
         </div>
       </div>
     </UContainer>
@@ -210,40 +185,7 @@ definePageMeta({
   middleware: "auth",
 });
 
-const supabase = useSupabaseClient();
 const user = useSupabaseUser();
-
-const signOut = async () => {
-  await supabase.auth.signOut();
-  await navigateTo("/login");
-};
-
-const menuItems = [
-  [
-    {
-      label: 'Home',
-      icon: 'i-heroicons-home',
-      onSelect: () => navigateTo('/'),
-    },
-    {
-      label: 'Dashboard',
-      icon: 'i-heroicons-squares-2x2',
-      onSelect: () => navigateTo('/dashboard'),
-    },
-    {
-      label: 'AI Chat',
-      icon: 'i-heroicons-chat-bubble-left-right',
-      onSelect: () => navigateTo('/ai-chat'),
-    },
-  ],
-  [
-    {
-      label: 'Sign Out',
-      icon: 'i-heroicons-arrow-right-on-rectangle',
-      onSelect: signOut,
-    },
-  ],
-];
 
 const formatDate = (dateString: string | null | undefined) => {
   if (!dateString) return "N/A";

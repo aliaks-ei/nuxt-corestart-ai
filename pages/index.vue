@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- App Header -->
+    <AppHeader />
+    
     <!-- Hero Section -->
     <UContainer class="py-16 sm:py-24">
       <div class="text-center">
@@ -14,7 +17,7 @@
           class="text-lg leading-8 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8"
         >
           Why spend days setting up auth when you can start coding in minutes? 
-          This template comes with magic link authentication, Google OAuth, and 
+          This template comes with magic link authentication, Google OAuth, OpenAI-powered AI chat, and 
           everything you need to build your next big idea. Just clone, customize, and ship! 🚀
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -23,6 +26,24 @@
           </UButton>
           <UButton
             variant="outline"
+            size="lg"
+            class="px-8"
+            @click="navigateTo('/ai-chat')"
+          >
+            Try AI Chat
+          </UButton>
+          <UButton
+            v-if="user"
+            variant="ghost"
+            size="lg"
+            class="px-8"
+            @click="navigateTo('/dashboard')"
+          >
+            View Dashboard
+          </UButton>
+          <UButton
+            v-else
+            variant="ghost"
             size="lg"
             class="px-8"
             @click="scrollToFeatures"
@@ -55,7 +76,7 @@
               />
             </div>
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Magic Link + Google Auth
+              Seamless Authentication
             </h3>
           </template>
           <p class="text-gray-600 dark:text-gray-300">
@@ -78,7 +99,7 @@
           </template>
           <p class="text-gray-600 dark:text-gray-300">
             Nuxt 3 for lightning-fast performance, Supabase for backend magic, 
-            and Nuxt UI for beautiful components. The dream team is assembled.
+            OpenAI for intelligent conversations, and Nuxt UI for beautiful components. The dream team is assembled.
           </p>
         </UCard>
 
@@ -133,12 +154,20 @@
             class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto"
           >
             Clone this template, add your own features, and you'll have a 
-            production-ready app faster than you can say "authentication flow". 
+            production-ready app with AI capabilities faster than you can say "authentication flow". 
             Your future self will thank you! 
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <UButton size="lg" class="px-8" @click="navigateTo('/login')">
               Test Drive the Auth
+            </UButton>
+            <UButton
+              variant="outline"
+              size="lg"
+              class="px-8"
+              @click="navigateTo('/ai-chat')"
+            >
+              Try AI Chat
             </UButton>
             <UButton
               v-if="!user"
@@ -151,7 +180,7 @@
             </UButton>
             <UButton
               v-if="user"
-              variant="outline"
+              variant="ghost"
               size="lg"
               class="px-8"
               @click="navigateTo('/dashboard')"
