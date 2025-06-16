@@ -1,0 +1,92 @@
+{
+  "recommendations": [
+    // Vue.js & Nuxt Development
+    "Vue.volar",
+    "Vue.vscode-typescript-vue-plugin",
+    "antfu.vite",
+    "johnsoncodehk.vscode-tsconfig-helper",
+    
+    // TypeScript & JavaScript
+    "ms-vscode.vscode-typescript-next",
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+    
+    // Code Quality & Formatting
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    
+    // Git & Version Control
+    "eamodio.gitlens",
+    "github.vscode-pull-request-github",
+    
+    // Database & API
+    "supabase.supabase-vscode",
+    "rangav.vscode-thunder-client",
+    
+    // Productivity & Navigation
+    "ms-vscode.vscode-json",
+    "redhat.vscode-yaml",
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode.remote-repositories",
+    
+    // AI & Development Tools
+    "continue.continue",
+    "tabnine.tabnine-vscode",
+    
+    // File Management & Icons
+    "vscode-icons-team.vscode-icons",
+    "pkief.material-icon-theme",
+    "antfu.iconify",
+    
+    // Testing & Debugging
+    "ms-vscode.vscode-node-azure-pack",
+    "wallabyjs.console-ninja"
+  ],
+  "unwantedRecommendations": [
+    // Conflicting Vue extensions
+    "octref.vetur",
+    "jcbuisson.vue",
+    "liuji-jim.vue",
+    
+    // Conflicting TypeScript extensions
+    "ms-vscode.typescript-javascript-grammar",
+    
+    // Conflicting formatting extensions
+    "hookyqr.beautify",
+    "esbenp.prettier-vscode-standard",
+    "rvest.vs-code-prettier-eslint",
+    
+    // Conflicting linting extensions
+    "ms-vscode.vscode-jshint",
+    "chenxsan.vscode-standardjs",
+    
+    // Conflicting CSS/Tailwind extensions
+    "syler.sass-indented",
+    "mrmlnc.vscode-scss",
+    "sibiraj-s.vscode-scss-formatter",
+    
+    // Conflicting auto-completion extensions
+    "visualstudioexptteam.vscodeintellicode",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    
+    // Conflicting Git extensions
+    "donjayamanne.githistory",
+    "huizhou.githd",
+    
+    // Conflicting icon themes (to avoid conflicts)
+    "robertohuertasm.vscode-icons",
+    "emmanuelbeziat.vscode-great-icons",
+    
+    // Conflicting AI assistants (to avoid conflicts)
+    "amazonwebservices.aws-toolkit-vscode",
+    "ms-toolsai.jupyter",
+    
+    // Legacy or conflicting Vue/Nuxt tools
+    "dariofuzinato.vue-peek",
+    "sdras.vue-vscode-snippets",
+    "hollowtree.vue-snippets"
+  ]
+}
